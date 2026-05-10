@@ -1,140 +1,305 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <meta http-equiv="refresh" content="0;url=https://bischan.ru"> -->
-  <title>Вселенной Бискаса — Витрина</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вселенная Бискаса</title>
   <style>
-    :root{--bg:#0f1724;--card:#111827;--accent:#ff8a4c;--muted:#94a3b8}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071025 0%,#03101a 100%);color:#e6eef6}
-    .container{max-width:1100px;margin:28px auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#ffb380,#ff6b6b);display:flex;align-items:center;justify-content:center;font-weight:700}
-    nav a{color:var(--muted);text-decoration:none;margin-left:16px}
-    .hero{background:rgba(255,255,255,0.02);border-radius:16px;padding:28px;margin-top:18px}
-    h1{margin:0;font-size:28px}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
-    .card{background:var(--card);border-radius:12px;padding:16px}
-    .chars{display:flex;flex-direction:column;gap:12px}
-    .char{display:flex;gap:12px;align-items:center}
-    .thumb{width:72px;height:72px;border-radius:10px;background:#0b1220;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-    footer{color:var(--muted);text-align:center;margin-top:28px;font-size:13px}
-    a.btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:#08101a;text-decoration:none;font-weight:600}
-    @media(max-width:880px){.grid{grid-template-columns:1fr} .thumb{width:56px;height:56px}}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0f1a, #1c1030);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 60%);
+      animation: pulse 6s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    h1 {
+      font-size: 4rem;
+      background: linear-gradient(90deg, #ff4fd8, #8a6dff, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      z-index: 2;
+    }
+
+    .subtitle {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      max-width: 700px;
+      color: #d0d0ff;
+      z-index: 2;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 30px;
+      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+    }
+
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ff7df0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00d4ff;
+    }
+
+    section {
+      padding: 100px 10%;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+      top: -50px;
+      right: -50px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #8a6dff;
+      box-shadow: 0 0 30px rgba(138,109,255,0.3);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #ff7df0;
+    }
+
+    .timeline {
+      margin-top: 40px;
+      border-left: 3px solid #8a6dff;
+      padding-left: 25px;
+    }
+
+    .event {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -34px;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ff4fd8;
+      box-shadow: 0 0 10px #ff4fd8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(0,0,0,0.4);
+      color: #aaa;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff4fd8, #8a6dff);
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      z-index: 2;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,79,216,0.5);
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <div class="logo">БФ</div>
-        <div>
-          <div style="font-weight:700">Вселенной Бискаса</div>
-          <div style="font-size:13px;color:var(--muted)">Фан-витрина — БисФД / Biskas Universe</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#about">О вселенной</a>
-        <a href="#characters">Персонажи</a>
-        <a href="#media">Медиа</a>
-        <a href="#community">Сообщество</a>
-      </nav>
-    </header>
 
-    <section class="hero card">
-      <h1 id="about">Кратко о вселенной Бискаса (БисФД)</h1>
-      <p style="color:var(--muted);margin-top:8px">Это фан-вселенная, сконцентрированная вокруг персонажей и историй, созданных автором под псевдонимом Виксур / Бискас. В основе — мульт-серии и фан-контент: "Разноцветные коты", "Бессмертное наследие" и сопутствующие клипы, где появились ключевые персонажи — Бискас, Врискас, Впискас и другие. На этой странице собрана базовая информация, галерея и ссылки на фан-ресурсы.</p>
-      <div style="margin-top:12px">
-        <a class="btn" href="#characters">Смотреть персонажей</a>
-      </div>
-    </section>
-
-    <div class="grid">
-      <main>
-        <div class="card">
-          <h2 id="characters">Главные персонажи</h2>
-          <p style="color:var(--muted)">Короткие карточки персонажей (содержимое на основе фан-энциклопедии и материалов сообщества).</p>
-          <div class="chars">
-            <div class="char">
-              <div class="thumb">Бискас</div>
-              <div>
-                <div style="font-weight:700">Бискас</div>
-                <div style="color:var(--muted)">Рыжий кот — один из центральных протагонистов серии "Разноцветные Коты"; в некоторых ответвлениях вселенной — главный герой "Бессмертного наследия".</div>
-              </div>
-            </div>
-
-            <div class="char">
-              <div class="thumb">Врискас</div>
-              <div>
-                <div style="font-weight:700">Врискас</div>
-                <div style="color:var(--muted)">Друг/второстепенный персонаж, обладающий особенными способностями — ночным зрением и др.</div>
-              </div>
-            </div>
-
-            <div class="char">
-              <div class="thumb">Впискас</div>
-              <div>
-                <div style="font-weight:700">Впискас</div>
-                <div style="color:var(--muted)">Антагонист, связанный с сюжетом вокруг обесцвечивания персонажей и конфликтов с Бискасом.</div>
-              </div>
-            </div>
-
-            <div class="char">
-              <div class="thumb">Ванесса</div>
-              <div>
-                <div style="font-weight:700">Ванесса</div>
-                <div style="color:var(--muted)">Персонаж из сериалов вселенной, появляющийся в нескольких сезонах и клипах.</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:16px" id="media">
-          <h2>Медиа и мерч</h2>
-          <p style="color:var(--muted)">В сообществе много фан-артов, фигурок и сувениров — примеры можно найти на маркетплейсах и в фан-галереях.</p>
-          <ul style="color:var(--muted);margin-top:8px">
-            <li>Клипы и серии — канал автора (видео-платформы)</li>
-            <li>Фигурки, стикерпаки, арты — маркетплейсы и фан-магазины</li>
-          </ul>
-        </div>
-
-        <div class="card" style="margin-top:16px" id="community">
-          <h2>Сообщество и фан-дом</h2>
-          <p style="color:var(--muted)">Существует активный фан-дом (БисФД) с Telegram-каналами, новостными пабликами и вики-энциклопедией, где волонтёры собирают и обсуждают информацию.</p>
-          <p style="color:var(--muted)"><strong>Полезные ссылки и вики:</strong></p>
-          <ul>
-            <li><a href="https://vselennaya-biskasa.fandom.com/ru/wiki/%D0%92%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%91%D0%B8%D1%81%D0%BA%D0%B0%D1%81%D0%B0" target="_blank">Fandom — Вселенная Бискаса (вики)</a></li>
-            <li><a href="https://vselennaya-biskasa.fandom.com/ru/wiki/%D0%9F%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%B6%D0%B8" target="_blank">Персонажи — Fandom</a></li>
-            <li><a href="https://vselennaya-biskasa.fandom.com/ru/wiki/%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D0%B8_%D0%91%D0%B8%D1%81%D0%A4%D0%94" target="_blank">Новости БисФД — Fandom</a></li>
-          </ul>
-        </div>
-
-      </main>
-
-      <aside>
-        <div class="card">
-          <h3>Быстрые ссылки</h3>
-          <ul style="color:var(--muted);margin-top:8px">
-            <li><a href="#about">О вселенной</a></li>
-            <li><a href="#characters">Персонажи</a></li>
-            <li><a href="#media">Медиа</a></li>
-          </ul>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <h3>Контакты</h3>
-          <p style="color:var(--muted)">Если хотите помочь с контентом — присылайте материалы в Telegram / профиль сообщества.</p>
-        </div>
-      </aside>
+  <nav>
+    <div class="logo">Бискас</div>
+    <div>
+      <a href="#characters">Персонажи</a>
+      <a href="#lore">Лор</a>
+      <a href="#timeline">История</a>
     </div>
+  </nav>
 
-    <footer>
-      <div>© Витрина Вселенной Бискаса — собрана на основе фан-материалов</div>
-    </footer>
-  </div>
+  <header>
+    <h1>ВСЕЛЕННАЯ БИСКАСА</h1>
+    <p class="subtitle">
+      Огромная интернет-вселенная с разноцветными котами, аномалиями, тайнами,
+      способностями и собственным лором.
+    </p>
+    <a href="#characters" class="button">Исследовать</a>
+  </header>
+
+  <section id="characters">
+    <h2>Главные персонажи</h2>
+
+    <div class="cards">
+      <div class="card">
+        <img src="https://placehold.co/400x250/ff4fd8/ffffff?text=Бискас" alt="Бискас" style="width:100%; border-radius:15px; margin-bottom:15px;">
+        <h3>Бискас</h3>
+        <p>
+          Центральный персонаж вселенной. Символ фандома и один из самых узнаваемых котов.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="https://placehold.co/400x250/8a6dff/ffffff?text=Белискас" alt="Белискас" style="width:100%; border-radius:15px; margin-bottom:15px;">
+        <h3>Белискас</h3>
+        <p>
+          Загадочный персонаж, связанный с тайнами и аномальными способностями.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="https://placehold.co/400x250/00d4ff/ffffff?text=Лискас" alt="Лискас" style="width:100%; border-radius:15px; margin-bottom:15px;">
+        <h3>Лискас</h3>
+        <p>
+          Один из разноцветных котов со своей историей и уникальным характером.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="https://placehold.co/400x250/ff7d7d/ffffff?text=Врискас" alt="Врискас" style="width:100%; border-radius:15px; margin-bottom:15px;">
+        <h3>Врискас</h3>
+        <p>
+          Персонаж с более мрачной атмосферой и важной ролью в событиях лора.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="lore">
+    <h2>Лор и аномалии</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Разноцветные коты</h3>
+        <p>
+          Основа всей вселенной. Каждый кот обладает уникальным стилем и историей.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Аномалии</h3>
+        <p>
+          Странные явления и силы, влияющие на мир и персонажей.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Фандом</h3>
+        <p>
+          Арты, мемы, анимации и теории — всё это стало частью огромного сообщества.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <h2>Хронология</h2>
+
+    <div class="timeline">
+      <div class="event">
+        <h3>Создание персонажей</h3>
+        <p>Появление первых разноцветных котов и зарождение вселенной.</p>
+      </div>
+
+      <div class="event">
+        <h3>Рост популярности</h3>
+        <p>Фандом начал активно делать арты, видео и теории.</p>
+      </div>
+
+      <div class="event">
+        <h3>Новые проекты</h3>
+        <p>Появление альбомов, мини-сериалов и расширение лора.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Вселенная Бискаса — фанатский сайт
+  </footer>
+
 </body>
 </html>
